@@ -5,8 +5,8 @@ export const links = [
   },
 
   {
-    id: "Services",
-    path: "/services",
+    id: "Explore",
+    path: "/menu",
   },
 
   {
