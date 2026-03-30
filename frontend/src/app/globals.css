@@ -1,0 +1,119 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+@theme {
+  --breakpoint-xs: 30rem;
+
+  --color-primary: #f9fafb;
+
+  --color-accent: #2fa8e3;
+  --color-accent-II: #e7346c;
+
+  --color-tertiary: #e4e4e4;
+
+  --color-contrast: #222222;
+  --color-contrast-II: #fcfcfc;
+
+  --color-success: #c3ff3d;
+  --color-error: #d2697d;
+
+  /*--color-accent: #b4b4fa; 
+  --color-primary-III: #b4d2eb;
+  --color-primary-IV: #c37d87;
+  --color-primary-V: #e6b973; */
+
+  --animate-blink: blink 0.5s step-start infinite alternate;
+  --animate-spin: spin 3s linear infinite;
+
+  @keyframes blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@layer utilities {
+  .content {
+    padding: 75px 20px;
+    margin: 25px 0;
+    max-width: 1440px;
+  }
+
+  .box {
+    box-shadow: -4px 4px 0px var(--color-contrast);
+    border: 3px solid var(--color-contrast);
+  }
+
+  .grid-background {
+    background-image:
+      linear-gradient(to right, #7d7d7d30 1.5px, transparent 1.5px),
+      linear-gradient(to bottom, #7d7d7d30 1.5px, transparent 1.5px);
+    background-size: 40px 40px;
+  }
+
+  .custom-scroll::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  .custom-scroll::-webkit-scrollbar-track {
+    background: transparent;
+    border-left: 3px solid var(--color-contrast);
+  }
+
+  .custom-scroll::-webkit-scrollbar-thumb {
+    background: var(--color-accent-II);
+    border-left: 3px solid var(--color-contrast);
+  }
+
+  .custom-scroll::-webkit-scrollbar-thumb:hover {
+    background: #9e294e;
+  }
+
+  .custom-slider::-webkit-slider-thumb {
+    appearance: none;
+    border: none;
+    height: 0.85em;
+    width: 0.85em;
+    border-radius: 4px;
+    background: var(--color-accent);
+    margin-top: -4px;
+  }
+
+  .custom-slider::-webkit-slider-runnable-track {
+    height: 0.3em;
+    background: var(--color-primary);
+    border: none;
+    border-radius: 3px;
+
+    .custom-slider:focus {
+      outline: none;
+    }
+  }
+
+  .anim-pause {
+    -webkit-animation-play-state: paused;
+    -moz-animation-play-state: paused;
+    -o-animation-play-state: paused;
+    animation-play-state: paused;
+  }
+}
+
+body {
+  overflow-x: hidden;
+  font-family: var(--CustomFont);
+}
