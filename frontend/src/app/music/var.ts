@@ -1,54 +1,15 @@
-import { InitialMusicType, MusicActionType } from "./type";
-
 export const musicInfo = [
   {
-    id: 1,
-    name: "Why We Lose",
-    author: "Cartoon feat. Coleman Trapp",
+    id: "1",
+    title: "Why We Lose",
+    artist: "Cartoon feat. Coleman Trapp",
+    fileURL: "chase.mp3",
   },
 
   {
-    id: 2,
-    name: "Espresso",
-    author: "Cartoon feat. Coleman Trapp",
-  },
-
-  {
-    id: 3,
-    name: "Mocha",
-    author: "Cartoon feat. Coleman Trapp",
-  },
-
-  {
-    id: 4,
-    name: "Why We Lose",
-    author: "Cartoon feat. Coleman Trapp",
-  },
-
-  {
-    id: 5,
-    name: "Espresso",
-    author: "Cartoon feat. Coleman Trapp",
-  },
-
-  {
-    id: 6,
-    name: "Mocha",
-    author: "Cartoon feat. Coleman Trapp",
+    id: "2",
+    title: "Espresso",
+    artist: "Cartoon feat. Coleman Trapp",
+    fileURL: "blazingsoul.mp3",
   },
 ];
-
-export const InitialMusic = {
-  song: [],
-  search: "",
-};
-
-export const MusicReducer: (
-  state: InitialMusicType,
-  action: MusicActionType,
-) => InitialMusicType = (state, action) => {
-  switch (action.type) {
-    case "SEARCH":
-      return { ...state, search: action.payload };
-  }
-};

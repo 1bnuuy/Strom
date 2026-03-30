@@ -56,7 +56,7 @@ export default function Banner() {
           >
             &gt; XONAR v1.0 //{" "}
             <span className="font-normal">
-              SYNC THE FREQUENCY. NAVIGATE THE WAVEFORM.
+              WHOEVER HAS EARS TO HEAR. LET THEM HEAR.
             </span>
           </motion.p>
         </div>

@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
+    "frontend": "next dev",
+    "backend": "cd ../backend && mvn spring-boot:run",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
@@ -13,6 +15,7 @@
     "@fortawesome/free-regular-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.1",
+    "concurrently": "^9.2.1",
     "framer-motion": "^12.36.0",
     "motion": "^12.23.25",
     "next": "^16.1.6",

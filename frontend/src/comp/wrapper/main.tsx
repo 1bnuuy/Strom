@@ -31,6 +31,8 @@ export default function Wrapper({ children }: { children: React.ReactNode }) {
       className={`bg-primary grid-background relative flex min-h-dvh w-full flex-col items-center justify-between overflow-hidden px-5`}
     >
       {children}
+
+      <span className="from-primary pointer-events-none fixed bottom-0 z-40 h-25 w-screen bg-linear-to-t from-1% to-transparent" />
     </motion.main>
   );
 }

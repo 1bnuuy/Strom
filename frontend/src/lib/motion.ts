@@ -2,7 +2,7 @@ export const AnimsProps = {
   entrance: {
     duration: 0.45,
     stagger: 0.3,
-    viewAmount: 0.35,
+    viewAmount: 0.75,
     delay: 0.25, //Initial delay
   },
 
@@ -46,6 +46,14 @@ export const _Shift = {
       duration: AnimsProps.interaction.duration,
       ease: AnimsProps.ease,
     },
+  },
+};
+
+export const _Arise = {
+  normal: { opacity: 0, y: 25 },
+  hover: {
+    opacity: 1,
+    y: 0,
   },
 };
 

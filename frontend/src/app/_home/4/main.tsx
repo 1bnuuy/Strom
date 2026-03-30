@@ -14,7 +14,7 @@ export default function Testimonials() {
         title="ADILO"
         highlight="SHAW"
         hlColor="bg-accent"
-        inherited={true}
+        inherited={false}
       />
 
       <div className="flex items-center justify-evenly gap-15 text-pretty max-md:flex-col max-md:items-center max-md:text-center">
@@ -31,16 +31,16 @@ export default function Testimonials() {
             key="steps"
             initial="hidden"
             whileInView="show"
-            className="z-20 flex w-screen bg-red-500 gap-y-[45px]"
+            className="z-20 flex w-screen gap-y-[45px] bg-red-500"
           >
-            {testimonials.map((t) => {
+            {testimonials.map((t, i) => {
               return (
                 <Info
-                  key={t.id}
+                  key={i}
                   name={t.name}
                   title={t.title}
                   opinion={t.opinion}
-                  direction={t.id % 2 === 0 ? 1 : -1}
+                  direction={i % 2 === 0 ? 1 : -1}
                 />
               );
             })}
