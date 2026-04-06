@@ -10,6 +10,7 @@ public class ArchiveApplication {
     public static void main(String[] args) {
         Dotenv dotenv = Dotenv.configure()
             .filename(".env.local")
+            .ignoreIfMissing() //In production
             .load();
     
         dotenv.entries().forEach(entry -> {
