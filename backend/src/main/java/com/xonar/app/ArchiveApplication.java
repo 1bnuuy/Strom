@@ -10,7 +10,7 @@ public class ArchiveApplication {
     public static void main(String[] args) {
         Dotenv dotenv = Dotenv.configure()
             .filename(".env.local")
-            .ignoreIfMissing() //In production
+            .ignoreIfMissing() //Omits .env.local in production, this fixed the render deployment lmao
             .load();
     
         dotenv.entries().forEach(entry -> {
