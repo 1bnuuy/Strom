@@ -1,9 +1,5 @@
 import MP3Tag from "mp3tag.js";
-import {
-  CancelHandlerType,
-  ScrollHandlerType,
-  UploadHandlerType,
-} from "./type";
+import { CancelHandlerType, UploadHandlerType } from "./type";
 
 export const UploadHandler = async ({
   file,
@@ -28,15 +24,4 @@ export const CancelHandler = ({ disUtility, input }: CancelHandlerType) => {
   if (input.current) {
     input.current.value = "";
   }
-};
-
-export const ScrollHandler = ({ scroll, direction }: ScrollHandlerType) => {
-  if (!scroll.current) return;
-
-  const amount = scroll.current.clientWidth * 0.5;
-
-  scroll.current.scrollBy({
-    left: direction === "LEFT" ? -amount : amount,
-    behavior: "smooth",
-  });
 };
