@@ -27,7 +27,7 @@ export default function Sidebar() {
   const path = usePathname();
   const { audio } = useUI();
   const [utility, disUtility] = useReducer(UtilityReducer, InitialUtility);
-  const { FETCH, authenticated } = useData();
+  const { FETCH, authenticated, username } = useData();
 
   const isAvail = AvailablePaths.includes(path);
 
@@ -98,16 +98,20 @@ export default function Sidebar() {
               )}
 
               <MotionLink
+                variants={_Scale}
                 initial="normal"
                 whileHover="hover"
                 whileTap="tap"
                 href={authenticated ? "/dashboard" : "/auth"}
                 key="/auth"
-                className={`text-subtext relative mt-auto flex size-[50px] shrink-0 items-center justify-center rounded-md text-2xl font-semibold ${path === "/profile" && "ring-accent ring-offset-secondary ring-2 ring-offset-2"}`}
+                className={`text-subtext bg-tertiary relative mt-auto flex size-[50px] shrink-0 items-center justify-center rounded-md text-2xl font-semibold ${path === "/profile" && "ring-accent ring-offset-secondary ring-2 ring-offset-2"}`}
               >
-                <motion.h3 variants={_Scale}>
+                <h3 className="sr-only">Account</h3>
+                {authenticated ? (
+                  <span className="capitalize">{username[0]}</span>
+                ) : (
                   <FontAwesomeIcon icon={faUser} />
-                </motion.h3>
+                )}
               </MotionLink>
             </div>
           </motion.div>

@@ -23,7 +23,7 @@ import Header from "./_/header";
 export default function Menu() {
   const { state, dispatch } = usePlayer();
   const [utility, disUtility] = useReducer(UtilityReducer, InitialUtility);
-  const { data, FETCH, loading } = useData();
+  const { data, FETCH, loading, authenticated } = useData();
 
   const input = useRef<HTMLInputElement | null>(null);
 
@@ -96,7 +96,9 @@ export default function Menu() {
                   })
                 ) : (
                   <p className="w-full text-center text-lg font-semibold">
-                    You haven't added any songs yet!
+                    {!authenticated
+                      ? "Please log in to add songs!"
+                      : "You haven't added any songs yet!"}
                   </p>
                 )}
               </>

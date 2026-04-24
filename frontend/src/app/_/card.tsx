@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 
 import { CardType } from "./type";
 
-import { PATCH } from "@/comp/logic/patch";
-import { DELETE } from "@/comp/logic/delete";
+import { PATCH } from "@/comp/logic/data/patch";
+import { DELETE } from "@/comp/logic/data/delete";
 import { usePlayer } from "@/comp/music/handler";
 import { useUI } from "@/comp/assets/UI";
 

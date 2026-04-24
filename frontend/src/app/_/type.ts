@@ -24,7 +24,7 @@ export type InitialUtilityType = {
   search: string;
   hoveredID: string | number | null;
   modal: boolean;
-  file: Partial<Omit<DataType, "fileURL">>;
+  file: Omit<DataType, "id" | "favorited">;
   tab: "FILE" | "INPUT";
 };
 
@@ -32,7 +32,7 @@ export type UtilityActionType =
   | { type: "SEARCH"; payload: string }
   | { type: "HOVER"; payload: string | number | null }
   | { type: "MODAL" }
-  | { type: "UPLOAD"; payload: Partial<Omit<DataType, "fileURL">> }
+  | { type: "UPLOAD"; payload: Partial<Omit<DataType, "id" | "favorited">> }
   | { type: "RESET" }
   | { type: "TAB"; payload?: "FILE" | "INPUT" };
 

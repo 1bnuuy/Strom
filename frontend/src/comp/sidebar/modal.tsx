@@ -3,7 +3,7 @@ import { useRef } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { POST } from "@/comp/logic/post";
+import { POST } from "@/comp/logic/data/post";
 
 import { _Scale, AnimsProps, View } from "@/lib/motion";
 
@@ -24,6 +24,7 @@ export default function Modal({ utility, disUtility, fetchData }: ModalType) {
 
   const title = rawTitle?.trim() || "";
   const artist = rawArtist?.trim() || "";
+  const file = input.current?.files?.[0];
 
   return (
     <div
@@ -43,7 +44,7 @@ export default function Modal({ utility, disUtility, fetchData }: ModalType) {
               key="form"
               onSubmit={async (e) => {
                 e.preventDefault();
-                if (!cover || !title || !artist) {
+                if (!cover || !title || !artist || !file) {
                   console.error("Validation failed: Missing fields");
                   return;
                 }
@@ -53,7 +54,7 @@ export default function Modal({ utility, disUtility, fetchData }: ModalType) {
                     cover,
                     title,
                     artist,
-                    fileURL: "blazingsoul.mp3",
+                    file,
                   });
 
                   CancelHandler({ disUtility, input });
@@ -82,7 +83,6 @@ export default function Modal({ utility, disUtility, fetchData }: ModalType) {
                 className={` ${utility.tab === "FILE" ? "z-40" : "pointer-events-none -z-10 brightness-90"} bg-secondary absolute flex w-full flex-col items-center justify-center gap-6 rounded-md border-2 p-4`}
               >
                 <TITLE
-                  utility={utility}
                   disUtility={disUtility}
                   input={input}
                   text="Add new track"
@@ -123,7 +123,6 @@ export default function Modal({ utility, disUtility, fetchData }: ModalType) {
                 className={` ${utility.tab === "INPUT" ? "z-40" : "pointer-events-none -z-10"} bg-secondary flex flex-col items-center justify-center gap-6 rounded-md border-2 p-4`}
               >
                 <TITLE
-                  utility={utility}
                   disUtility={disUtility}
                   input={input}
                   text="Track details"
@@ -184,7 +183,7 @@ export default function Modal({ utility, disUtility, fetchData }: ModalType) {
   );
 }
 
-const TITLE = ({ utility, disUtility, input, text }: TitleType) => {
+const TITLE = ({ disUtility, input, text }: TitleType) => {
   return (
     <div className="flex w-full items-center justify-between">
       <div className="flex items-center justify-center gap-x-2 font-semibold">
@@ -224,7 +223,7 @@ const FILE = ({ utility, disUtility, input }: FileType) => {
         />
       ) : (
         <span className="text-subtext pointer-events-none absolute top-1/2 left-1/2 -translate-1/2 text-xl font-semibold">
-          {input.current?.value ? utility.file.cover : "+ Choose File"}
+          + Choose File
         </span>
       )}
 

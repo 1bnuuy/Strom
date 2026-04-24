@@ -7,13 +7,16 @@ export type ModalType = {
 };
 
 export type TitleType = {
-  utility: InitialUtilityType;
   disUtility: React.Dispatch<UtilityActionType>;
   input: React.RefObject<HTMLInputElement | null>;
   text: string
 };
 
-export type FileType = Omit<TitleType, "text">;
+export type FileType = {
+  utility: InitialUtilityType
+  disUtility: React.Dispatch<UtilityActionType>;
+  input: React.RefObject<HTMLInputElement | null>;
+};
 
 export type InputType = {
   disUtility: React.Dispatch<UtilityActionType>;

@@ -20,7 +20,7 @@ export default function Auth() {
       </div>
 
       <button
-        className="bg-accent absolute -bottom-35 size-70! cursor-pointer rounded-full"
+        className="bg-accent absolute bottom-0 left-1/2 -translate-x-1/2 size-70! z-40 cursor-pointer rounded-full"
         onClick={() => disAuth({ type: "SWITCH" })}
       >
         {auth.type}

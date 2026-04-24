@@ -3,42 +3,56 @@ package com.xonar.app.security;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtUtils {
     @Value("${app.jwt.secret}") private String secretKey;
-    private int jwtExpirationMs = 86400000; // 24 hours
 
-    public String generateTokens(Authentication authentication) {
-        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
-
+    // Short-lived token
+    public String generateAccessToken(UserDetails user) {
         return Jwts.builder()
-        .setSubject(userPrincipal.getUsername())
-        .setIssuedAt(new Date())
-        .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-        .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()), SignatureAlgorithm.HS256)
-        .compact();
+            .subject(user.getUsername())
+            .issuedAt(new Date())
+            .expiration(new Date((new Date()).getTime() + 15 * 60 * 1000)) // 15 mins
+            .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()))
+            .compact();
+    }
+
+    // Long-lived token
+    public String generateRefreshToken(UserDetails user) {
+        return Jwts.builder()
+            .subject(user.getUsername())
+            .issuedAt(new Date())
+            .expiration(new Date((new Date()).getTime() + 7 * 24 * 60 * 60 * 1000)) // 7 days
+            .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()))
+            .compact();
     }
 
     public String getUsernameFromToken(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes())).build()
-                .parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser()
+            .verifyWith(Keys.hmacShaKeyFor(secretKey.getBytes()))
+            .build()
+            .parseSignedClaims(token)
+            .getPayload()
+            .getSubject();
     }
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder().setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes())).build().parseClaimsJws(token);
+            Jwts.parser()
+                .verifyWith(Keys.hmacShaKeyFor(secretKey.getBytes()))
+                .build()
+                .parseSignedClaims(token);
             
             return true;
-        } catch (Exception e) {
+
+        } catch (JwtException e) {
             return false;
         }
     }

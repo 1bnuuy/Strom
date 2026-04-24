@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
         .allowedOrigins("https://x0nar.vercel.app", "http://localhost:3000")
         .allowedMethods("GET", "POST", "PATCH", "DELETE", "OPTIONS")
-        .allowedHeaders("Authorization", "Content-Type")
+        .allowedHeaders("*")
         .allowCredentials(true);
     }
 }
