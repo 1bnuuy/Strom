@@ -15,7 +15,17 @@ export type DataContextType = {
   username: string
 };
 
-export type PostType = Omit<DataType, "id" | "favorited">;
+export type ClientReloadType = {
+  url: string;
+  options?: RequestInit
+}
+
+export type PostType = {
+  cover: string;
+  title: string;
+  artist: string;
+  file: File
+}
 
 export type PatchType = {
   id: string;
@@ -29,3 +39,5 @@ export type RegisterType = {
   username: string;
   password: string;
 };
+
+export type LoginType = RegisterType

@@ -3,7 +3,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faEye } from "@fortawesome/free-regular-svg-icons";
 
-import { REGISTER } from "@/comp/logic/register";
+import { REGISTER } from "@/comp/logic/auth/register";
 
 import { AuthInputType, AuthType } from "./type";
 
@@ -22,7 +22,7 @@ export default function Register({ auth, disAuth }: AuthType) {
       </h2>
 
       <form
-      autoComplete="off"
+        autoComplete="off"
         onSubmit={(e) => {
           e.preventDefault();
 

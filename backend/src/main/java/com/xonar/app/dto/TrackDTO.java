@@ -18,7 +18,7 @@ public class TrackDTO {
     @NotBlank private String cover;
     @NotBlank private String title;
     @NotBlank private String artist;
-    @NotBlank private String fileURL;
+    private String fileURL;
 
     @NotNull @Builder.Default private Boolean favorited = false;
 }

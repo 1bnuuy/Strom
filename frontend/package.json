@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
     "frontend": "next dev --turbo",
-    "backend": "cd ../backend && mvn spring-boot:run",
+    "backend": "mvn -f ../backend/pom.xml spring-boot:run",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

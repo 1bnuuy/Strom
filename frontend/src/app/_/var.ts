@@ -5,11 +5,10 @@ export const InitialUtility: InitialUtilityType = {
   hoveredID: null,
   modal: false,
   file: {
-    id: "",
     cover: "",
     title: "",
     artist: "",
-    favorited: false,
+    fileURL: "",
   },
   tab: "FILE",
 };
@@ -34,7 +33,7 @@ export const UtilityReducer: (
     case "RESET":
       return {
         ...state,
-        file: { id: "", cover: "", title: "", artist: "", favorited: false },
+        file: { cover: "", title: "", artist: "", fileURL: "" },
       };
 
     case "TAB":

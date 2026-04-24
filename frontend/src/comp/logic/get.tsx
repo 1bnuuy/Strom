@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import { DataContextType, DataType } from "./type";
 import { API_URL } from "./api";
+import { clientReload } from "./client";
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
@@ -27,42 +28,33 @@ export default function DataProvider({
   const FETCH = async () => {
     setLoading(true);
 
-    const token = localStorage.getItem("token");
-
-    const headers = {
-      "Content-type": "application/json",
-      Authorization: token ? `Bearer ${token}` : "",
-    };
-
     try {
-      const [resData, resAuth] = await Promise.all([
-        fetch(`${API_URL}/data`, { headers: headers }),
-        fetch(`${API_URL}/dashboard`, { headers: headers }),
-      ]);
+      const resAuth = await clientReload({
+        url: `${API_URL}/dashboard`,
+        options: { credentials: "include" },
+      });
 
-      if (resData.status === 401) {
+      if (!resAuth.ok) {
         setAuthenticated(false);
-        throw new Error("Unauthorized access");
+        return;
       }
 
-      if (!resData.ok || !resAuth.ok) {
-        const dataErr = !resData.ok ? await resData.text() : "OK";
-        const authErr = !resData.ok ? await resAuth.text() : "OK";
-
-        console.error(`Data status: ${resData.status} - ${dataErr}`);
-        console.error(`Auth status: ${resAuth.status} - ${authErr}`);
-
-        throw new Error("Failed to fetch data or user details!");
-      }
-
-      const resultData = await resData.json();
-      const resultAuth = await resAuth.json();
-
-      setData(Array.isArray(resultData) ? resultData : [resultData]);
+      const auth = await resAuth.json();
       setAuthenticated(true);
-      setUsername(resultAuth.username);
+      setUsername(auth.username);
+
+      const resData = await clientReload({
+        url: `${API_URL}/data`,
+        options: { credentials: "include" },
+      });
+
+      if (!resData.ok) throw new Error("Fetch failed");
+
+      const data = await resData.json();
+      setData(Array.isArray(data) ? data : [data]);
     } catch (err) {
-      console.log("Error: ", err);
+      setAuthenticated(false);
+      console.error("Fetch error: ", err);
     } finally {
       setLoading(false);
     }

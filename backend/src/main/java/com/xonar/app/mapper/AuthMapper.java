@@ -20,6 +20,7 @@ public class AuthMapper {
             .id(entity.getId())
             .username(entity.getUsername())
             .role(entity.getRole())
+            .refreshToken(entity.getRefreshToken())
             .build();
     }
 }

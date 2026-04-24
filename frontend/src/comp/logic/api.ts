@@ -1,4 +1,4 @@
-export const API_URL = process.env.NEXT_PUBLIC_API_DEV;
+export const API_URL = process.env.NEXT_PUBLIC_API_PROD;
 
 // NEXT_PUBLIC_API_PROD=https://strom-jo72.onrender.com/api
 

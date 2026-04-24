@@ -1,7 +1,5 @@
 package com.xonar.app.entity;
 
-import java.util.Set;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -21,11 +19,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class AuthEntity {
-    
     @Id @Setter(AccessLevel.NONE) private String id;
     @Indexed(unique = true) private String username;
     @NotBlank private String password;
-
-    @Builder.Default
-    private Set<String> role = Set.of("USER");
+    private String refreshToken; 
+    @Builder.Default private String role = "USER";
 }
